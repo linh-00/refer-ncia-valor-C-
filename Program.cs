@@ -2,6 +2,31 @@
 
 public class Program
 {
+    static void Demo6()
+    {
+         int[] numeros = new int[] {0,2,4,6,8};
+       WriteLine($"Digite o número que gostaria de encontrar");
+       var numero = int.Parse(ReadLine());
+       var idxEncontrado = EncontrarNumero(numeros, numero);
+
+       if (idxEncontrado >= 0)
+       {
+            WriteLine($"O número digitado esta na posição {idxEncontrado}");
+       }
+
+       else
+       {
+            WriteLine("O número digitado não foi encontrado");
+       }
+
+    }
+    static void Demo5()
+    {
+         int[] pares = new int[] {0,2,4,6,8};
+
+        MudarParaImpar(pares);
+        WriteLine($"Os ímpares {string.Join(",", pares)}");
+    }
     static void Demo4()
     {
          string nome = "Lihn";
@@ -79,11 +104,53 @@ public class Program
             pares[i] = pares[i] + 1;
         }
     }
+
+    static int EncontrarNumero(int[] numeros, int numero)
+    {
+        for(int i = 0; i <numeros.Length; i++)
+        {
+            if(numeros[i] == numero)
+            return i;
+        }
+        return -1;
+    }
+    static bool EncontrarPessoa(List<StructPessoa> pessoas, StructPessoa pessoa)
+    {
+        foreach(var item in pessoas)
+        {
+            if(item.Equals(pessoa))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public static void Main()
     {
-        int[] pares = new int[] {0,2,4,6,8};
+        List<StructPessoa> pessoas = new List<StructPessoa>()
+        {
+            new StructPessoa(){Nome = "Ricardo"},
+            new StructPessoa(){Nome = "João"},
+            new StructPessoa(){Nome = "Maria"},
+            new StructPessoa(){Nome = "Rosa"},
+            new StructPessoa(){Nome = "Lihn"},
+            new StructPessoa(){Nome = "Rafaela"},
+            new StructPessoa(){Nome = "Dominic"},
+        };
 
-        MudarParaImpar(pares);
-        WriteLine($"Os ímpares {string.Join(",", pares)}");
+        WriteLine($"Digite a pessoa que gostaria de localizar:");
+        var nome = ReadLine();
+        var pessoa = new StructPessoa(){Nome = nome};
+        var encontrado = EncontrarPessoa(pessoas, pessoa);
+        if(encontrado)
+        {
+            WriteLine("Pessoa Localizada!");
+        }
+
+        else
+        {
+            WriteLine("Pessoa não encontrada");
+        }
+      
     }
 }
